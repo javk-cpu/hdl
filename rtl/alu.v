@@ -26,4 +26,12 @@ input        clk;
 output [7:0] out;
 output [3:0] flags;
 
+wire a;
+wire b;
+wire op;
+wire clk;
+
+reg out;
+reg flags;
+
 endmodule
