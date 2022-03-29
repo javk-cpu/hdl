@@ -20,4 +20,10 @@
 `define JAVK_HDL_ALU
 
 
+`define Z 4'b1000
+`define N 4'b0100
+`define C 4'b0010
+`define V 4'b0001
+
+
 `endif /* JAVK_HDL_ALU */
