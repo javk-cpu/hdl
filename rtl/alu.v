@@ -16,11 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-module alu(a, b, op, out, flags);
+module alu(a, b, op, clk, out, flags);
 
 input  [7:0] a;
 input  [7:0] b;
 input  [3:0] op;
+input        clk;
 
 output [7:0] out;
 output [3:0] flags;
