@@ -39,4 +39,29 @@ wire clk;
 reg out;
 reg flags;
 
+
+always @(posedge clk)
+begin
+	case (op)
+	`ALU_OP_ADD:
+		out = a + b;
+	`ALU_OP_SUB:
+		out = a - b;
+	`ALU_OP_NEG:
+		out = ~a;
+	`ALU_OP_AND:
+		out = a & b;
+	`ALU_OP_ORR:
+		out = a | b;
+	`ALU_OP_EOR:
+		out = a ^ b;
+	`ALU_OP_LSL:
+		out = a << shamt;
+	`ALU_OP_LSR:
+		out = a >> shamt;
+	default:
+		out = a;
+	endcase
+end
+
 endmodule
