@@ -16,6 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+`include "alu.vh"
+
+
 module alu(a, b, op, shamt, clk, out, flags);
 
 input  [7:0] a;
