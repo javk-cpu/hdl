@@ -20,6 +20,15 @@
 `define JAVK_HDL_ALU
 
 
+`define ALU_OP_ADD 3'b000
+`define ALU_OP_SUB 3'b001
+`define ALU_OP_NEG 3'b010
+`define ALU_OP_AND 3'b011
+`define ALU_OP_ORR 3'b100
+`define ALU_OP_EOR 3'b101
+`define ALU_OP_LSL 3'b110
+`define ALU_OP_LSR 3'b111
+
 `define ALU_FLAG_Z 4'b1000
 `define ALU_FLAG_N 4'b0100
 `define ALU_FLAG_C 4'b0010
