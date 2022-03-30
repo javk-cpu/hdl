@@ -1,5 +1,5 @@
 /*
- * flags.vh -- flag definitions
+ * alu.vh -- 8-bit arithmetic logic unit
  * Copyright (C) 2022  Jacob Koziej <jacobkoziej@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
