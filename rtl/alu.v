@@ -72,6 +72,7 @@ begin
 
 	flags[`FLAG_Z] <= !tmp_out[7:0];
 	flags[`FLAG_N] <= tmp_out[7];
+	flags[`FLAG_C] <= tmp_out[8];
 	flags[`FLAG_V] <= (tmp_out[15:8]) ? 1 : 0;
 end
 
