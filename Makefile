@@ -25,9 +25,12 @@ IVERILOGFLAGS += -I$(RTL) -Wall -g2012
 ALU_SRC = $(RTL)/alu.v
 ALU_TB  = $(TESTS)/alu_tb.v
 
+PC_SRC = $(RTL)/pc.v
+PC_TB  = $(TESTS)/pc_tb.v
+
 
 .PHONY: all
-all: alu_tb
+all: alu_tb pc_tb
 
 
 .PHONY: clean
@@ -39,8 +42,16 @@ clean:
 alu_tb: $(BUILD)/$(TESTS)/alu_tb
 
 
+.PHONY: pc_tb
+pc_tb: $(BUILD)/$(TESTS)/pc_tb
+
+
 $(BUILD)/$(TESTS)/alu_tb: $(ALU_TB) $(ALU_SRC) $(BUILD)/$(TESTS)
 	$(IVERILOG) $(IVERILOGFLAGS) -o $(BUILD)/$(TESTS)/alu_tb $(ALU_TB) $(ALU_SRC)
+
+
+$(BUILD)/$(TESTS)/pc_tb: $(PC_TB) $(PC_SRC) $(BUILD)/$(TESTS)
+	$(IVERILOG) $(IVERILOGFLAGS) -o $(BUILD)/$(TESTS)/pc_tb $(PC_TB) $(PC_SRC)
 
 
 $(BUILD)/$(TESTS): $(BUILD)
