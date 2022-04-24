@@ -29,8 +29,8 @@
 `define ALU_OP_LSL 3'b110
 `define ALU_OP_LSR 3'b111
 
-`define ALU_FLAG_Z 4'b1000
-`define ALU_FLAG_N 4'b0100
+`define ALU_FLAG_N 4'b1000
+`define ALU_FLAG_Z 4'b0100
 `define ALU_FLAG_C 4'b0010
 `define ALU_FLAG_V 4'b0001
 

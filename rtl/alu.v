@@ -20,8 +20,8 @@
 `include "alu.vh"
 
 
-`define FLAG_Z 3
-`define FLAG_N 2
+`define FLAG_N 3
+`define FLAG_Z 2
 `define FLAG_C 1
 `define FLAG_V 0
 
@@ -70,8 +70,8 @@ always @(posedge clk)
 begin
 	out <= tmp_out;
 
-	flags[`FLAG_Z] <= !tmp_out[7:0];
 	flags[`FLAG_N] <= tmp_out[7];
+	flags[`FLAG_Z] <= !tmp_out[7:0];
 	flags[`FLAG_C] <= tmp_out[8];
 	flags[`FLAG_V] <= (tmp_out[15:8]) ? 1 : 0;
 end
