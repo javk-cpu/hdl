@@ -36,23 +36,23 @@ always @(posedge clk)
 begin
 	case (op)
 	`ALU_OP_ADD:
-		out = a + b;
+		out <= a + b;
 	`ALU_OP_SUB:
-		out = a - b;
+		out <= a - b;
 	`ALU_OP_NEG:
-		out = ~b;
+		out <= ~b;
 	`ALU_OP_AND:
-		out = a & b;
+		out <= a & b;
 	`ALU_OP_ORR:
-		out = a | b;
+		out <= a | b;
 	`ALU_OP_EOR:
-		out = a ^ b;
+		out <= a ^ b;
 	`ALU_OP_LSL:
-		out = a << shamt;
+		out <= a << shamt;
 	`ALU_OP_LSR:
-		out = a >> shamt;
+		out <= a >> shamt;
 	default:
-		out = a;
+		out <= a;
 	endcase
 end
 
