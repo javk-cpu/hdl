@@ -48,9 +48,9 @@ begin
 	`ALU_OP_EOR:
 		out <= a ^ b;
 	`ALU_OP_LSL:
-		out <= a << shamt;
+		out <= out << shamt;
 	`ALU_OP_LSR:
-		out <= a >> shamt;
+		out <= out >> shamt;
 	default:
 		out <= out;
 	endcase
