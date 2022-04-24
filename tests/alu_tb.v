@@ -16,6 +16,58 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-module alu_tb();
+`include "alu.vh"
+
+
+module alu_tb;
+
+
+reg [7:0] a;
+reg [7:0] b;
+reg [2:0] op;
+reg [2:0] shamt;
+
+reg clk;
+
+wire [7:0] out;
+wire [3:0] flags;
+
+alu uut(
+	.a(a),
+	.b(b),
+	.op(op),
+	.shamt(shamt),
+	.clk(clk),
+	.out(out),
+	.flags(flags)
+);
+
+
+initial
+begin
+	$display("a    | b    | op    | shamt | out  | zncv");
+	$display("-----+------+-------+-------+------+--------");
+	a     = 8'b0;
+	b     = 8'b0;
+	op    = `ALU_OP_ADD;  // TODO: finish testing other operations
+	shamt = 3'b0;
+	clk   = 0;
+
+
+	for (integer i = 0; i <= 'hff; i = i + 1)
+	begin
+		for (integer j = 0; j <= 'hff; j = j + 1)
+		begin
+			a = i;
+			b = j;
+			clk <= 1;
+			#1;
+			clk <= 0;
+			#1;
+			$display("0x%2h | 0x%2h | 0b%3b | 0b%3b | 0x%2h | 0b%4b", a, b, op, shamt, out, flags);
+		end
+	end
+end
+
 
 endmodule
