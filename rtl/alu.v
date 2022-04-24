@@ -32,6 +32,12 @@ module alu(
 );
 
 
+wire [7:0] cur_out;
+
+
+assign cur_out = out;
+
+
 always @(posedge clk)
 begin
 	case (op)
@@ -48,11 +54,11 @@ begin
 	`ALU_OP_EOR:
 		out <= a ^ b;
 	`ALU_OP_LSL:
-		out <= out << shamt;
+		out <= cur_out << shamt;
 	`ALU_OP_LSR:
-		out <= out >> shamt;
+		out <= cur_out >> shamt;
 	default:
-		out <= out;
+		out <= cur_out;
 	endcase
 end
 
