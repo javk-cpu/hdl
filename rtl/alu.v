@@ -1,6 +1,7 @@
 /*
  * alu.v -- 8-bit arithmetic logic unit
  * Copyright (C) 2022  Jacob Koziej <jacobkoziej@gmail.com>
+ * Copyright (C) 2022  Ani Vardanyan <ani.var.2003@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,25 +20,16 @@
 `include "alu.vh"
 
 
-module alu(a, b, op, shamt, clk, out, flags);
+module alu(
+	input wire [7:0] a,
+	input wire [7:0] b,
+	input wire [2:0] op,
+	input wire [2:0] shamt,
+	input wire       clk,
 
-input  [7:0] a;
-input  [7:0] b;
-input  [2:0] op;
-input  [2:0] shamt;
-input        clk;
-
-output [7:0] out;
-output [3:0] flags;
-
-wire a;
-wire b;
-wire op;
-wire shamt;
-wire clk;
-
-reg out;
-reg flags;
+	output reg [7:0] out,
+	output reg [3:0] flags
+);
 
 
 always @(posedge clk)
