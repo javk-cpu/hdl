@@ -35,7 +35,7 @@ clean:
 	@rm -rvf $(BUILD)
 
 
-.PHONY: alu
+.PHONY: alu_tb
 alu_tb: $(BUILD)/$(TESTS)/alu_tb
 
 
