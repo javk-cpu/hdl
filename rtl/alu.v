@@ -52,7 +52,7 @@ begin
 	`ALU_OP_LSR:
 		out <= a >> shamt;
 	default:
-		out <= a;
+		out <= out;
 	endcase
 end
 
