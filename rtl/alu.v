@@ -40,7 +40,7 @@ begin
 	`ALU_OP_SUB:
 		out = a - b;
 	`ALU_OP_NEG:
-		out = ~a;
+		out = ~b;
 	`ALU_OP_AND:
 		out = a & b;
 	`ALU_OP_ORR:
