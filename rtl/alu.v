@@ -20,6 +20,12 @@
 `include "alu.vh"
 
 
+`define FLAG_Z 3
+`define FLAG_N 2
+`define FLAG_C 1
+`define FLAG_V 0
+
+
 module alu(
 	input wire [7:0] a,
 	input wire [7:0] b,
@@ -32,34 +38,40 @@ module alu(
 );
 
 
-wire [7:0] cur_out;
+reg  [15:0] tmp_out;
 
 
-assign cur_out = out;
+always @(a or b or op or shamt)
+begin
+	case (op)
+	`ALU_OP_ADD:
+		tmp_out = a + b;
+	`ALU_OP_SUB:
+		tmp_out = a - b;
+	`ALU_OP_NEG:
+		tmp_out = ~b;
+	`ALU_OP_AND:
+		tmp_out = a & b;
+	`ALU_OP_ORR:
+		tmp_out = a | b;
+	`ALU_OP_EOR:
+		tmp_out = a ^ b;
+	`ALU_OP_LSL:
+		tmp_out = a << shamt;
+	`ALU_OP_LSR:
+		tmp_out = a >> shamt;
+	default:
+		tmp_out = 8'b0;
+	endcase
+end
 
 
 always @(posedge clk)
 begin
-	case (op)
-	`ALU_OP_ADD:
-		out <= a + b;
-	`ALU_OP_SUB:
-		out <= a - b;
-	`ALU_OP_NEG:
-		out <= ~b;
-	`ALU_OP_AND:
-		out <= a & b;
-	`ALU_OP_ORR:
-		out <= a | b;
-	`ALU_OP_EOR:
-		out <= a ^ b;
-	`ALU_OP_LSL:
-		out <= cur_out << shamt;
-	`ALU_OP_LSR:
-		out <= cur_out >> shamt;
-	default:
-		out <= cur_out;
-	endcase
+	out <= tmp_out;
+
+	flags[`FLAG_Z] <= !tmp_out[7:0];
 end
+
 
 endmodule
