@@ -25,4 +25,8 @@ module pc(
 );
 
 
+always @(posedge ld)  out <= addr;
+always @(posedge clk) out <= out + 1;
+
+
 endmodule
