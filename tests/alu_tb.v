@@ -39,6 +39,7 @@ alu uut(
 	.op(op),
 	.shamt(shamt),
 	.clk(clk),
+
 	.out(out),
 	.flags(flags)
 );
