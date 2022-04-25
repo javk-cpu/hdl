@@ -19,4 +19,60 @@
 module pc_tb;
 
 
+reg [15:0] addr;
+
+reg ld;
+reg clk;
+
+wire [15:0] out;
+
+pc uut(
+	.addr(addr),
+	.ld(ld),
+	.clk(clk),
+
+	.out(out)
+);
+
+
+initial
+begin
+	addr = 0;
+	ld   = 1;
+	#1;
+	ld = 0;
+	#1;
+
+	$display("addr   | ld  | out");
+	$display("-------+-----+-------");
+
+	clk = 0;
+	for (integer i = 0; i <= 'hf; i = i + 1)
+	begin
+		clk <= 1;
+		#1;
+		clk <= 0;
+		#1;
+
+		$display("0x%4h | 0b%1b | 0x%4h", addr, ld, out);
+	end
+
+	addr = 16'hffff;
+	ld = 1;
+	#1;
+
+	$display("0x%4h | 0b%1b | 0x%4h", addr, ld, out);
+
+	ld = 0;
+	#1;
+
+	clk <= 1;
+	#1;
+	clk <= 0;
+	#1;
+
+	$display("0x%4h | 0b%1b | 0x%4h", addr, ld, out);
+end
+
+
 endmodule
