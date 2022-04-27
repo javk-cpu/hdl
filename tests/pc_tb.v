@@ -1,5 +1,5 @@
 /*
- * pc.v -- program counter (test bench)
+ * pc_tb.v -- program counter (test bench)
  * Copyright (C) 2022  Jacob Koziej <jacobkoziej@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
