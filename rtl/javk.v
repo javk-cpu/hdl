@@ -22,8 +22,8 @@ module javk(
 	input wire clk,
 	input wire rst,
 
-	output reg  [15:0] addrbus,
-	output wire        rw
+	output reg [15:0] addrbus,
+	output reg        rw
 );
 
 
@@ -51,6 +51,8 @@ assign zr = 8'b0;
 
 always @(negedge clk)
 begin
+	rw <= 0;
+
 	if (rst)
 	begin
 		a <= 8'b0;
@@ -68,6 +70,11 @@ begin
 		n <= 8'b0;
 		o <= 8'b0;
 	end
+end
+
+always @(posedge clk)
+begin
+	rw <= 1;
 end
 
 
