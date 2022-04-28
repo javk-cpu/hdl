@@ -29,7 +29,6 @@ module javk(
 
 // 8-bit registers
 reg [7:0] a;
-reg [7:0] flags;
 reg [7:0] b;
 reg [7:0] c;
 reg [7:0] d;
@@ -44,6 +43,7 @@ reg [7:0] m;
 reg [7:0] n;
 reg [7:0] o;
 reg [7:0] zr;
+reg [7:0] flags;
 
 
 assign zr = 8'b0;
