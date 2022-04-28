@@ -16,7 +16,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-module javk;
+module javk(
+	inout wire [7:0] databus,
+
+	input wire clk,
+	input wire rst,
+
+	output reg  [15:0] addrbus,
+	output wire        rw
+);
 
 
 endmodule
