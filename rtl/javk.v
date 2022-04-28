@@ -49,4 +49,26 @@ reg [7:0] zr;
 assign zr = 8'b0;
 
 
+always @(negedge clk)
+begin
+	if (rst)
+	begin
+		a <= 8'b0;
+		b <= 8'b0;
+		c <= 8'b0;
+		d <= 8'b0;
+		e <= 8'b0;
+		g <= 8'b0;
+		h <= 8'b0;
+		i <= 8'b0;
+		j <= 8'b0;
+		k <= 8'b0;
+		l <= 8'b0;
+		m <= 8'b0;
+		n <= 8'b0;
+		o <= 8'b0;
+	end
+end
+
+
 endmodule
