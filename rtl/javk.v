@@ -43,6 +43,10 @@ reg [7:0] l;
 reg [7:0] m;
 reg [7:0] n;
 reg [7:0] o;
+reg [7:0] zr;
+
+
+assign zr = 8'b0;
 
 
 endmodule
