@@ -27,4 +27,22 @@ module javk(
 );
 
 
+// 8-bit registers
+reg [7:0] a;
+reg [7:0] flags;
+reg [7:0] b;
+reg [7:0] c;
+reg [7:0] d;
+reg [7:0] e;
+reg [7:0] g;
+reg [7:0] h;
+reg [7:0] i;
+reg [7:0] j;
+reg [7:0] k;
+reg [7:0] l;
+reg [7:0] m;
+reg [7:0] n;
+reg [7:0] o;
+
+
 endmodule
