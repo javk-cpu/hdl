@@ -25,6 +25,9 @@ IVERILOGFLAGS += -I$(RTL) -Wall -g2012
 ALU_SRC = $(RTL)/alu.v
 ALU_TB  = $(TESTS)/alu_tb.v
 
+CTRL_SRC = $(RTL)/ctrl.v
+CTRL_TB  = $(TESTS)/ctrl_tb.v
+
 JAVK_SRC = $(RTL)/javk.v
 JAVK_TB  = $(TESTS)/javk_tb.v
 
@@ -33,7 +36,7 @@ PC_TB  = $(TESTS)/pc_tb.v
 
 
 .PHONY: all
-all: alu_tb javk_tb pc_tb
+all: alu_tb ctrl_tb javk_tb pc_tb
 
 
 .PHONY: clean
@@ -43,6 +46,10 @@ clean:
 
 .PHONY: alu_tb
 alu_tb: $(BUILD)/$(TESTS)/alu_tb
+
+
+.PHONY: ctrl_tb
+alu_tb: $(BUILD)/$(TESTS)/ctrl_tb
 
 
 .PHONY: javk_tb
@@ -55,6 +62,10 @@ pc_tb: $(BUILD)/$(TESTS)/pc_tb
 
 $(BUILD)/$(TESTS)/alu_tb: $(ALU_TB) $(ALU_SRC) $(BUILD)/$(TESTS)
 	$(IVERILOG) $(IVERILOGFLAGS) -o $(BUILD)/$(TESTS)/alu_tb $(ALU_TB) $(ALU_SRC)
+
+
+$(BUILD)/$(TESTS)/ctrl_tb: $(CTRL_TB) $(CTRL_SRC) $(BUILD)/$(TESTS)
+	$(IVERILOG) $(IVERILOGFLAGS) -o $(BUILD)/$(TESTS)/ctrl_tb $(CTRL_TB) $(CTRL_SRC)
 
 
 $(BUILD)/$(TESTS)/javk_tb: $(JAVK_TB) $(JAVK_SRC) $(BUILD)/$(TESTS)
