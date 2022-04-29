@@ -27,49 +27,9 @@ module javk(
 );
 
 
-// 8-bit registers
-reg [7:0] a;
-reg [7:0] b;
-reg [7:0] c;
-reg [7:0] d;
-reg [7:0] e;
-reg [7:0] g;
-reg [7:0] h;
-reg [7:0] i;
-reg [7:0] j;
-reg [7:0] k;
-reg [7:0] l;
-reg [7:0] m;
-reg [7:0] n;
-reg [7:0] o;
-reg [7:0] zr;
-reg [7:0] flags;
-
-
-assign zr = 8'b0;
-
-
 always @(negedge clk)
 begin
 	rw <= 0;
-
-	if (rst)
-	begin
-		a <= 8'b0;
-		b <= 8'b0;
-		c <= 8'b0;
-		d <= 8'b0;
-		e <= 8'b0;
-		g <= 8'b0;
-		h <= 8'b0;
-		i <= 8'b0;
-		j <= 8'b0;
-		k <= 8'b0;
-		l <= 8'b0;
-		m <= 8'b0;
-		n <= 8'b0;
-		o <= 8'b0;
-	end
 end
 
 always @(posedge clk)
