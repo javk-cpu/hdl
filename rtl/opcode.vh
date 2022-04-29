@@ -20,4 +20,22 @@
 `define JAVK_HDL_OPCODE
 
 
+`define OPCODE_ADD 4'b0000  // add
+`define OPCODE_SUB 4'b0001  // subtract
+`define OPCODE_NEG 4'b0010  // negate
+`define OPCODE_AND 4'b0011  // and
+`define OPCODE_ORR 4'b0100  // inclusive or
+`define OPCODE_EOR 4'b0101  // exclusive or
+`define OPCODE_LSL 4'b0110  // logical shift left
+`define OPCODE_LSR 4'b0111  // logical shift right
+`define OPCODE_MVA 4'b1000  // move 'a' register
+`define OPCODE_MVB 4'b1001  // move 16-bit register
+`define OPCODE_LNL 4'b1010  // load nibble low
+`define OPCODE_LNH 4'b1011  // load nibble high
+`define OPCODE_LDB 4'b1100  // load byte
+`define OPCODE_STB 4'b1101  // store byte
+`define OPCODE_JPC 4'b1110  // jump (conditional)
+`define OPCODE_JPU 4'b1111  // jump (unconditional)
+
+
 `endif /* JAVK_HDL_OPCODE */
