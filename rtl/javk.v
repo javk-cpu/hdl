@@ -45,4 +45,7 @@ assign databus = rw ? dataout : 8'bz;
 assign datain  = rw ? 8'bz : databus;
 
 
+assign regfile[`REGFILE_Z] = 8'b0;
+
+
 endmodule
