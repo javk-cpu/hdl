@@ -27,15 +27,14 @@ module javk(
 );
 
 
-always @(negedge clk)
-begin
-	rw <= 0;
-end
+wire [7:0] datain;
+reg  [7:0] dataout;
 
-always @(posedge clk)
-begin
-	rw <= 1;
-end
+
+always @(negedge clk) rw <= 0;
+always @(posedge clk) rw <= 1;
+assign databus =  rw ? dataout : 8'bz;
+assign datain  = !rw ? databus : 8'bz;
 
 
 endmodule
