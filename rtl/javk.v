@@ -16,6 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+`include "regfile.vh"
+
+
 module javk(
 	inout wire [7:0] databus,
 
@@ -30,6 +33,10 @@ module javk(
 wire [7:0] datain;
 reg  [7:0] dataout;
 reg        we;
+
+reg [7:0]  regfile [15:0];
+reg [15:0] pc;
+reg [15:0] sp;
 
 
 always @(negedge clk) rw <= 0;
