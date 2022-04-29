@@ -37,5 +37,10 @@
 `define REGFILE_O 4'b1110
 `define REGFILE_Z 4'b1111
 
+`define REGFILE_PC 2'b00
+`define REGFILE_SP 2'b01
+`define REGFILE_IJ 2'b10
+`define REGFILE_KL 2'b11
+
 
 `endif /* JAVK_HDL_REGFILE */
