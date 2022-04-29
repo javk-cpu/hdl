@@ -20,4 +20,22 @@
 `define JAVK_HDL_REGFILE
 
 
+`define REGFILE_A 4'b0000
+`define REGFILE_B 4'b0001
+`define REGFILE_C 4'b0010
+`define REGFILE_D 4'b0011
+`define REGFILE_E 4'b0100
+`define REGFILE_F 4'b0101
+`define REGFILE_G 4'b0110
+`define REGFILE_H 4'b0111
+`define REGFILE_I 4'b1000
+`define REGFILE_J 4'b1001
+`define REGFILE_K 4'b1010
+`define REGFILE_L 4'b1011
+`define REGFILE_M 4'b1100
+`define REGFILE_N 4'b1101
+`define REGFILE_O 4'b1110
+`define REGFILE_Z 4'b1111
+
+
 `endif /* JAVK_HDL_REGFILE */
