@@ -58,6 +58,9 @@ alu alu_javk(
 
 reg  [7:0] instr;
 wire       fetch;
+wire [3:0] reg_sel;
+wire [1:0] reg16_src;
+wire [1:0] reg16_dst;
 
 ctrl ctrl_javk(
 	.instr(instr),
@@ -67,7 +70,10 @@ ctrl ctrl_javk(
 	.alu_op(alu_op),
 	.alu_shamt(alu_shamt),
 	.alu_clk(alu_clk),
-	.fetch(fetch)
+	.fetch(fetch),
+	.reg_sel(reg_sel),
+	.reg16_src(reg16_src),
+	.reg16_dst(reg16_dst)
 );
 
 
@@ -77,6 +83,7 @@ assign databus = rw ? dataout : 8'bz;
 assign datain  = rw ? 8'bz : databus;
 
 
+assign alu_reg = regfile[reg_sel];
 assign regfile[`REGFILE_Z] = 8'b0;
 
 
