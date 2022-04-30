@@ -38,6 +38,17 @@ reg [7:0]  regfile [15:0];
 reg [15:0] pc;
 reg [15:0] sp;
 
+reg  [7:0] instr;
+wire       fetch;
+
+ctrl ctrl_javk(
+	.instr(instr),
+	.clk(clk),
+	.rst(rst),
+
+	.fetch(fetch)
+);
+
 
 always @(negedge clk) rw <= 0;
 always @(posedge clk) rw <= we ? 1 : 0;
