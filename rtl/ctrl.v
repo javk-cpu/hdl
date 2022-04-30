@@ -56,15 +56,7 @@ assign alu_op    = opcode[2:0];
 assign alu_shamt = operand[2:0];
 
 always @(negedge clk) alu_clk <= 0;
-
-always @(posedge clk)
-begin
-	if (!opcode[`OPCODE_ARITHMETIC_BIT])
-	begin
-		#1;
-		alu_clk <= 1;
-	end
-end
+always @(posedge clk) if (!opcode[`OPCODE_ARITHMETIC_BIT]) alu_clk <= 1;
 
 
 endmodule
