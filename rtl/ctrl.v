@@ -16,7 +16,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-module ctrl;
+module ctrl(
+	input wire [7:0] instr
+);
+
+
+wire [3:0] opcode  = instr[7:4];
+wire [3:0] operand = instr[3:0];
 
 
 endmodule
