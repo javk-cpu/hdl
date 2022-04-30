@@ -49,11 +49,11 @@ alu_tb: $(BUILD)/$(TESTS)/alu_tb
 
 
 .PHONY: ctrl_tb
-alu_tb: $(BUILD)/$(TESTS)/ctrl_tb
+ctrl_tb: $(BUILD)/$(TESTS)/ctrl_tb
 
 
 .PHONY: javk_tb
-alu_tb: $(BUILD)/$(TESTS)/javk_tb
+javk_tb: $(BUILD)/$(TESTS)/javk_tb
 
 
 .PHONY: pc_tb
