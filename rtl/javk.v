@@ -75,4 +75,19 @@ begin
 end
 
 
+always @(negedge clk)
+begin
+	if (fetch)
+	begin
+		addrbus <= pc;
+		#1;
+
+		instr <= datain;
+		#1;
+
+		pc <= pc + 1;
+	end
+end
+
+
 endmodule
