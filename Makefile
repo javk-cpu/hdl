@@ -28,7 +28,7 @@ ALU_TB  = $(TESTS)/alu_tb.v
 CTRL_SRC = $(RTL)/ctrl.v
 CTRL_TB  = $(TESTS)/ctrl_tb.v
 
-JAVK_SRC = $(RTL)/javk.v $(CTRL_SRC)
+JAVK_SRC = $(RTL)/javk.v $(ALU_SRC) $(CTRL_SRC)
 JAVK_TB  = $(TESTS)/javk_tb.v
 
 

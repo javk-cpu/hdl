@@ -38,6 +38,24 @@ reg [7:0]  regfile [15:0];
 reg [15:0] pc;
 reg [15:0] sp;
 
+reg  [7:0] alu_reg;
+wire [2:0] alu_op;
+wire [2:0] alu_shamt;
+wire [3:0] alu_flags;
+wire       alu_clk;
+reg  [7:0] alu_out;
+
+alu alu_javk(
+	.a(regfile[`REGFILE_A]),
+	.b(alu_reg),
+	.op(alu_op),
+	.shamt(alu_shamt),
+	.clk(alu_clk),
+
+	.out(alu_out),
+	.flags(alu_flags)
+);
+
 reg  [7:0] instr;
 wire       fetch;
 
@@ -46,6 +64,9 @@ ctrl ctrl_javk(
 	.clk(clk),
 	.rst(rst),
 
+	.alu_op(alu_op),
+	.alu_shamt(alu_shamt),
+	.alu_clk(alu_clk),
 	.fetch(fetch)
 );
 
