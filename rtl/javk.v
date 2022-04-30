@@ -48,4 +48,20 @@ assign datain  = rw ? 8'bz : databus;
 assign regfile[`REGFILE_Z] = 8'b0;
 
 
+always @(negedge clk)
+begin
+	if (rst)
+	begin
+		addrbus <= 0;
+		rw      <= 0;
+
+		dataout <= 0;
+		we      <= 0;
+
+		pc <= 0;
+		sp <= 0;
+	end
+end
+
+
 endmodule
