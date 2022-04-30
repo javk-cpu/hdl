@@ -19,6 +19,7 @@
 module ctrl(
 	input wire [7:0] instr,
 	input            clk,
+	input            rst,
 
 	output reg fetch
 );
@@ -26,6 +27,15 @@ module ctrl(
 
 wire [3:0] opcode  = instr[7:4];
 wire [3:0] operand = instr[3:0];
+
+
+always @(negedge clk)
+begin
+	if (rst)
+	begin
+		fetch <= 1;
+	end
+end
 
 
 endmodule
