@@ -1,5 +1,5 @@
 /*
- * pc_tb.v -- program counter (test bench)
+ * regfile.vh -- register file
  * Copyright (C) 2022  Jacob Koziej <jacobkoziej@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,63 +16,31 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-module pc_tb;
+`ifndef JAVK_HDL_REGFILE
+`define JAVK_HDL_REGFILE
 
 
-reg [15:0] addr;
+`define REGFILE_A 4'b0000
+`define REGFILE_B 4'b0001
+`define REGFILE_C 4'b0010
+`define REGFILE_D 4'b0011
+`define REGFILE_E 4'b0100
+`define REGFILE_F 4'b0101
+`define REGFILE_G 4'b0110
+`define REGFILE_H 4'b0111
+`define REGFILE_I 4'b1000
+`define REGFILE_J 4'b1001
+`define REGFILE_K 4'b1010
+`define REGFILE_L 4'b1011
+`define REGFILE_M 4'b1100
+`define REGFILE_N 4'b1101
+`define REGFILE_O 4'b1110
+`define REGFILE_Z 4'b1111
 
-reg ld;
-reg clk;
-
-wire [15:0] out;
-
-pc uut(
-	.addr(addr),
-	.ld(ld),
-	.clk(clk),
-
-	.out(out)
-);
-
-
-initial
-begin
-	addr = 0;
-	ld   = 1;
-	#1;
-	ld = 0;
-	#1;
-
-	$display("addr   | ld  | out");
-	$display("-------+-----+-------");
-
-	clk = 0;
-	for (integer i = 0; i <= 'hf; i = i + 1)
-	begin
-		clk <= 1;
-		#1;
-		clk <= 0;
-		#1;
-
-		$display("0x%4h | 0b%1b | 0x%4h", addr, ld, out);
-	end
-
-	addr = 16'hffff;
-	ld = 1;
-	#1;
-
-	$display("0x%4h | 0b%1b | 0x%4h", addr, ld, out);
-
-	ld = 0;
-	#1;
-
-	clk <= 1;
-	#1;
-	clk <= 0;
-	#1;
-
-	$display("0x%4h | 0b%1b | 0x%4h", addr, ld, out);
-end
+`define REGFILE_PC 2'b00
+`define REGFILE_SP 2'b01
+`define REGFILE_IJ 2'b10
+`define REGFILE_KL 2'b11
 
 
-endmodule
+`endif /* JAVK_HDL_REGFILE */

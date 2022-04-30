@@ -1,5 +1,5 @@
 /*
- * pc.v -- program counter
+ * javk_tb.v -- JAVK CPU (test bench)
  * Copyright (C) 2022  Jacob Koziej <jacobkoziej@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,17 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-module pc(
-	input wire [15:0] addr,
-	input wire        ld,
-	input wire        clk,
-
-	output reg [15:0] out
-);
-
-
-always @(posedge ld)  out <= addr;
-always @(posedge clk) out <= out + 1;
+module javk_tb;
 
 
 endmodule
