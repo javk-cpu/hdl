@@ -17,7 +17,10 @@
  */
 
 module ctrl(
-	input wire [7:0] instr
+	input wire [7:0] instr,
+	input            clk,
+
+	output reg fetch
 );
 
 
