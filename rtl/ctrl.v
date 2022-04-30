@@ -16,12 +16,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+`include "opcode.vh"
+
+
 module ctrl(
 	input wire [7:0] instr,
 	input            clk,
 	input            rst,
 
-	output reg fetch
+	output reg [2:0] alu_op,
+	output reg [2:0] alu_shamt,
+	output reg       alu_clk,
+	output reg       fetch
 );
 
 
@@ -34,6 +40,21 @@ begin
 	if (rst)
 	begin
 		fetch <= 1;
+	end
+end
+
+
+assign alu_op    = opcode[2:0];
+assign alu_shamt = operand[2:0];
+
+always @(negedge clk) alu_clk <= 0;
+
+always @(posedge clk)
+begin
+	if (!opcode[`OPCODE_ARITHMETIC_BIT])
+	begin
+		#1;
+		alu_clk <= 1;
 	end
 end
 

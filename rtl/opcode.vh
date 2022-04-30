@@ -37,5 +37,7 @@
 `define OPCODE_JPC 4'b1110  // jump (conditional)
 `define OPCODE_JPU 4'b1111  // jump (unconditional)
 
+`define OPCODE_ARITHMETIC_BIT 3
+
 
 `endif /* JAVK_HDL_OPCODE */
