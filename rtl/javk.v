@@ -40,7 +40,7 @@ reg [15:0] sp;
 
 reg  [7:0] alu_reg;
 wire [2:0] alu_op;
-wire [2:0] alu_shamt;
+wire [3:0] alu_shamt;
 wire [3:0] alu_flags;
 wire       alu_clk;
 reg  [7:0] alu_out;

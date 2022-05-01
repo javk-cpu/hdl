@@ -26,7 +26,7 @@ module alu_tb;
 reg [7:0] a;
 reg [7:0] b;
 reg [2:0] op;
-reg [2:0] shamt;
+reg [3:0] shamt;
 
 reg clk;
 

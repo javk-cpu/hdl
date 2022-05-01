@@ -26,7 +26,7 @@ module ctrl(
 
 	output wire [3:0] addr_offset,
 	output reg  [2:0] alu_op,
-	output reg  [2:0] alu_shamt,
+	output reg  [3:0] alu_shamt,
 	output reg        alu_clk,
 	output wire       fetch,
 	output wire [3:0] nibble_out,
@@ -55,7 +55,7 @@ assign reg16_dst  = operand[1:0];
 
 
 assign alu_op    = opcode[2:0];
-assign alu_shamt = operand[2:0];
+assign alu_shamt = operand;
 
 always @(negedge clk) alu_clk <= 0;
 always @(posedge clk) if (!opcode[`OPCODE_ARITHMETIC_BIT]) alu_clk <= 1;

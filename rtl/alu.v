@@ -30,7 +30,7 @@ module alu(
 	input wire [7:0] a,
 	input wire [7:0] b,
 	input wire [2:0] op,
-	input wire [2:0] shamt,
+	input wire [3:0] shamt,
 	input wire       clk,
 
 	output reg [7:0] out,
