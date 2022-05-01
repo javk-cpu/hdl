@@ -21,4 +21,22 @@
 `define JAVK_HDL_FLAG
 
 
+`define FLAG_EQ 4'b0000
+`define FLAG_NE 4'b0001
+`define FLAG_HS 4'b0010
+`define FLAG_LO 4'b0011
+`define FLAG_MI 4'b0100
+`define FLAG_PL 4'b0101
+`define FLAG_VS 4'b0110
+`define FLAG_VC 4'b0111
+`define FLAG_HI 4'b1000
+`define FLAG_LS 4'b1001
+`define FLAG_GE 4'b1010
+`define FLAG_LT 4'b1011
+`define FLAG_GT 4'b1100
+`define FLAG_LE 4'b1101
+`define FLAG_AL 4'b1110
+`define FLAG_NV 4'b1111
+
+
 `endif /* JAVK_HDL_FLAG */
