@@ -1,6 +1,7 @@
 /*
  * javk_tb.v -- JAVK CPU (test bench)
  * Copyright (C) 2022  Jacob Koziej <jacobkoziej@gmail.com>
+ * Copyright (C) 2022  Ani Vardanyan <ani.var.2003@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,9 +44,8 @@ javk uut(
 wire [7:0] dataread;
 reg  [7:0] datawrite;
 
-
-assign databus  = rw ? datawrite : 8'bz;
-assign dataread = rw ? 8'bz : databus;
+assign databus  = rw ? 8'bz : datawrite;
+assign dataread = rw ? databus : 8'bz;
 
 
 always
