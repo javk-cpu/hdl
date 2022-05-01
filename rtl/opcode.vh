@@ -34,8 +34,8 @@
 `define OPCODE_LNH 4'b1011  // load nibble high
 `define OPCODE_LDB 4'b1100  // load byte
 `define OPCODE_STB 4'b1101  // store byte
-`define OPCODE_JPC 4'b1110  // jump (conditional)
-`define OPCODE_JPU 4'b1111  // jump (unconditional)
+`define OPCODE_JMP 4'b1110  // jump
+`define OPCODE_JPL 4'b1111  // jump (with link)
 
 `define OPCODE_ARITHMETIC_BIT 3
 
