@@ -28,6 +28,7 @@ module ctrl(
 	output reg  [2:0] alu_shamt,
 	output reg        alu_clk,
 	output reg        fetch,
+	output wire [3:0] nibble_out,
 	output wire [3:0] reg_sel,
 	output wire [1:0] reg16_src,
 	output wire [1:0] reg16_dst,
@@ -39,9 +40,10 @@ wire [3:0] opcode  = instr[7:4];
 wire [3:0] operand = instr[3:0];
 
 
-assign reg_sel   = operand;
-assign reg16_src = operand[3:2];
-assign reg16_dst = operand[1:0];
+assign nibble_out = operand;
+assign reg_sel    = operand;
+assign reg16_src  = operand[3:2];
+assign reg16_dst  = operand[1:0];
 
 
 always @(negedge clk)

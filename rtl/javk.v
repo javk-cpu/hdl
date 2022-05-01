@@ -57,6 +57,7 @@ alu alu_javk(
 
 reg  [7:0] instr;
 wire       fetch;
+wire [3:0] nibble_out;
 wire [3:0] reg_sel;
 wire [1:0] reg16_src;
 wire [1:0] reg16_dst;
@@ -71,6 +72,7 @@ ctrl ctrl_javk(
 	.alu_shamt(alu_shamt),
 	.alu_clk(alu_clk),
 	.fetch(fetch),
+	.nibble_out(nibble_out),
 	.reg_sel(reg_sel),
 	.reg16_src(reg16_src),
 	.reg16_dst(reg16_dst),
