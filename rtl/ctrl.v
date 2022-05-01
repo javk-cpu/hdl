@@ -29,7 +29,9 @@ module ctrl(
 	output reg  [3:0] alu_shamt,
 	output reg        alu_clk,
 	output wire       fetch,
+	output wire       nibble_hl,
 	output wire [3:0] nibble_out,
+	output wire       nibble_read,
 	output wire [3:0] reg_sel,
 	output wire [1:0] reg16_src,
 	output wire [1:0] reg16_dst,
@@ -59,6 +61,10 @@ assign alu_shamt = operand;
 
 always @(negedge clk) alu_clk <= 0;
 always @(posedge clk) if (!opcode[`OPCODE_ARITHMETIC_BIT]) alu_clk <= 1;
+
+
+assign nibble_hl   = (opcode == `OPCODE_LNH);
+assign nibble_read = (opcode == `OPCODE_LNL || opcode == `OPCODE_LNH);
 
 
 endmodule

@@ -59,7 +59,9 @@ alu alu_javk(
 reg  [7:0] instr;
 wire [3:0] addr_offset;
 wire       fetch;
+wire       nibble_hl;
 wire [3:0] nibble_out;
+wire       nibble_read;
 wire [3:0] reg_sel;
 wire [1:0] reg16_src;
 wire [1:0] reg16_dst;
@@ -74,7 +76,9 @@ ctrl ctrl_javk(
 	.alu_shamt(alu_shamt),
 	.alu_clk(alu_clk),
 	.fetch(fetch),
+	.nibble_hl(nibble_hl),
 	.nibble_out(nibble_out),
+	.nibble_read(nibble_read),
 	.reg_sel(reg_sel),
 	.reg16_src(reg16_src),
 	.reg16_dst(reg16_dst),
@@ -128,6 +132,16 @@ begin
 
 		if (rw) dataout <= regfile[`REGFILE_A];
 		else    regfile[`REGFILE_A] <= datain;
+	end
+end
+
+
+always @(posedge clk)
+begin
+	if (nibble_read)
+	begin
+		if (nibble_hl) regfile[`REGFILE_A][7:4] <= nibble_out;
+		else           regfile[`REGFILE_A][3:0] <= nibble_out;
 	end
 end
 
