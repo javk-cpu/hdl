@@ -67,7 +67,6 @@ wire       we;
 ctrl ctrl_javk(
 	.instr(instr),
 	.clk(clk),
-	.rst(rst),
 
 	.alu_op(alu_op),
 	.alu_shamt(alu_shamt),
@@ -108,24 +107,24 @@ end
 
 always @(negedge clk)
 begin
-	if (fetch)
-	begin
-		addrbus <= pc;
-		#1;
+	addrbus <= pc;
+	#1;
 
-		instr <= datain;
-		#1;
+	instr <= datain;
+	#1;
 
-		pc <= pc + 1;
-	end
+	pc <= pc + 1;
 end
 
-always @(negedge clk)
+always @(posedge clk)
 begin
-	if (!fetch)
+	if (fetch)
 	begin
 		addrbus <= {regfile[`REGFILE_I], regfile[`REGFILE_J]};
 		#1;
+
+		if (rw) dataout <= regfile[`REGFILE_A];
+		else    regfile[`REGFILE_A] <= datain;
 	end
 end
 

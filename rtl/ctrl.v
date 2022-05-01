@@ -23,22 +23,25 @@
 module ctrl(
 	input wire [7:0] instr,
 	input            clk,
-	input            rst,
 
 	output reg  [2:0] alu_op,
 	output reg  [2:0] alu_shamt,
 	output reg        alu_clk,
-	output reg        fetch,
+	output wire       fetch,
 	output wire [3:0] nibble_out,
 	output wire [3:0] reg_sel,
 	output wire [1:0] reg16_src,
 	output wire [1:0] reg16_dst,
-	output reg        we
+	output wire       we
 );
 
 
 wire [3:0] opcode  = instr[7:4];
 wire [3:0] operand = instr[3:0];
+
+
+assign fetch = (opcode == `OPCODE_LDB || opcode == `OPCODE_STB);
+assign we    = (opcode == `OPCODE_STB);
 
 
 assign nibble_out = operand;
@@ -47,31 +50,11 @@ assign reg16_src  = operand[3:2];
 assign reg16_dst  = operand[1:0];
 
 
-always @(negedge clk)
-begin
-	if (rst)
-	begin
-		fetch <= 1;
-		we    <= 0;
-	end
-end
-
-
 assign alu_op    = opcode[2:0];
 assign alu_shamt = operand[2:0];
 
 always @(negedge clk) alu_clk <= 0;
 always @(posedge clk) if (!opcode[`OPCODE_ARITHMETIC_BIT]) alu_clk <= 1;
-
-
-always @(posedge clk)
-begin
-	if (opcode == `OPCODE_STB)
-	begin
-		fetch <= !fetch;
-		we    <= !we;
-	end
-end
 
 
 endmodule
