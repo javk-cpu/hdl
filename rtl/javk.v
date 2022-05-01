@@ -89,6 +89,7 @@ assign datain  = rw ? 8'bz : databus;
 
 
 assign alu_reg = regfile[reg_sel];
+always @(alu_out) regfile[`REGFILE_A] <= alu_out;
 
 
 always @(negedge clk)
