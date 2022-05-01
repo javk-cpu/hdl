@@ -24,6 +24,7 @@ module ctrl(
 	input wire [7:0] instr,
 	input            clk,
 
+	output wire [3:0] addr_offset,
 	output reg  [2:0] alu_op,
 	output reg  [2:0] alu_shamt,
 	output reg        alu_clk,
@@ -38,6 +39,9 @@ module ctrl(
 
 wire [3:0] opcode  = instr[7:4];
 wire [3:0] operand = instr[3:0];
+
+
+assign addr_offset = operand;
 
 
 assign fetch = (opcode == `OPCODE_LDB || opcode == `OPCODE_STB);

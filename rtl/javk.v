@@ -57,6 +57,7 @@ alu alu_javk(
 );
 
 reg  [7:0] instr;
+wire [3:0] addr_offset;
 wire       fetch;
 wire [3:0] nibble_out;
 wire [3:0] reg_sel;
@@ -68,6 +69,7 @@ ctrl ctrl_javk(
 	.instr(instr),
 	.clk(clk),
 
+	.addr_offset(addr_offset),
 	.alu_op(alu_op),
 	.alu_shamt(alu_shamt),
 	.alu_clk(alu_clk),
@@ -120,7 +122,7 @@ always @(posedge clk)
 begin
 	if (fetch)
 	begin
-		addrbus <= {regfile[`REGFILE_I], regfile[`REGFILE_J]};
+		addrbus <= {regfile[`REGFILE_I], regfile[`REGFILE_J]} + addr_offset;
 		#1;
 
 		if (rw) dataout <= regfile[`REGFILE_A];
