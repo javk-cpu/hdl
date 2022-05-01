@@ -16,7 +16,45 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+`define CLK_TICKS 16
+
+
 module javk_tb;
+
+
+wire [7:0] databus;
+
+reg clk;
+reg rst;
+
+wire [15:0] addrbus;
+wire        rw;
+
+javk uut(
+	.databus(databus),
+
+	.clk(clk),
+	.rst(rst),
+
+	.addrbus(addrbus),
+	.rw(rw)
+);
+
+wire [7:0] dataread;
+reg  [7:0] datawrite;
+
+
+assign databus  = rw ? datawrite : 8'bz;
+assign dataread = rw ? 8'bz : databus;
+
+
+always
+begin
+	clk <= 0;
+	#`CLK_TICKS;
+	clk <= 1;
+	#`CLK_TICKS;
+end
 
 
 endmodule
