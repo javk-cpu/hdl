@@ -117,5 +117,14 @@ begin
 	end
 end
 
+always @(negedge clk)
+begin
+	if (!fetch)
+	begin
+		addrbus <= {regfile[`REGFILE_I], regfile[`REGFILE_J]};
+		#1;
+	end
+end
+
 
 endmodule
