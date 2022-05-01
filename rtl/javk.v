@@ -32,7 +32,6 @@ module javk(
 
 wire [7:0] datain;
 reg  [7:0] dataout;
-reg        we;
 
 reg [7:0]  regfile [15:0];
 reg [15:0] pc;
@@ -61,6 +60,7 @@ wire       fetch;
 wire [3:0] reg_sel;
 wire [1:0] reg16_src;
 wire [1:0] reg16_dst;
+wire       we;
 
 ctrl ctrl_javk(
 	.instr(instr),
@@ -73,7 +73,8 @@ ctrl ctrl_javk(
 	.fetch(fetch),
 	.reg_sel(reg_sel),
 	.reg16_src(reg16_src),
-	.reg16_dst(reg16_dst)
+	.reg16_dst(reg16_dst),
+	.we(we)
 );
 
 
@@ -95,7 +96,6 @@ begin
 		rw      <= 0;
 
 		dataout <= 0;
-		we      <= 0;
 
 		pc <= 0;
 		sp <= 0;

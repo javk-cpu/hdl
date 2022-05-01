@@ -30,7 +30,8 @@ module ctrl(
 	output reg        fetch,
 	output wire [3:0] reg_sel,
 	output wire [1:0] reg16_src,
-	output wire [1:0] reg16_dst
+	output wire [1:0] reg16_dst,
+	output reg        we
 );
 
 
@@ -48,6 +49,7 @@ begin
 	if (rst)
 	begin
 		fetch <= 1;
+		we    <= 0;
 	end
 end
 
