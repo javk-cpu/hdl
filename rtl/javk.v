@@ -59,6 +59,8 @@ alu alu_javk(
 reg  [7:0] instr;
 wire [3:0] addr_offset;
 wire       fetch;
+wire       mva;
+wire       mvb;
 wire       nibble_hl;
 wire [3:0] nibble_out;
 wire       nibble_read;
@@ -76,6 +78,8 @@ ctrl ctrl_javk(
 	.alu_shamt(alu_shamt),
 	.alu_clk(alu_clk),
 	.fetch(fetch),
+	.mva(mva),
+	.mvb(mvb),
 	.nibble_hl(nibble_hl),
 	.nibble_out(nibble_out),
 	.nibble_read(nibble_read),
@@ -132,6 +136,95 @@ begin
 
 		if (rw) dataout <= regfile[`REGFILE_A];
 		else    regfile[`REGFILE_A] <= datain;
+	end
+end
+
+
+always @(posedge clk)
+begin
+	if (mva)
+	begin
+		if ((reg_sel != `REGFILE_A) && (reg_sel != `REGFILE_Z))
+		begin
+			regfile[reg_sel] <= regfile[`REGFILE_A];
+		end
+	end
+end
+
+always @(posedge clk)
+begin
+	if (mvb)
+	begin
+		case (reg16_dst)
+		`REGFILE_PC:
+			case (reg16_src)
+			`REGFILE_PC:
+				pc <= pc;
+			`REGFILE_SP:
+				pc <= sp;
+			`REGFILE_IJ:
+				pc <= {regfile[`REGFILE_I], regfile[`REGFILE_J]};
+			`REGFILE_KL:
+				pc <= {regfile[`REGFILE_K], regfile[`REGFILE_L]};
+			endcase
+		`REGFILE_SP:
+			case (reg16_src)
+			`REGFILE_PC:
+				sp <= pc;
+			`REGFILE_SP:
+				sp <= sp;
+			`REGFILE_IJ:
+				sp <= {regfile[`REGFILE_I], regfile[`REGFILE_J]};
+			`REGFILE_KL:
+				sp <= {regfile[`REGFILE_K], regfile[`REGFILE_L]};
+			endcase
+		`REGFILE_IJ:
+			case (reg16_src)
+			`REGFILE_PC:
+			begin
+				regfile[`REGFILE_I] <= pc[15:8];
+				regfile[`REGFILE_J] <= pc[7:0];
+			end
+			`REGFILE_SP:
+			begin
+				regfile[`REGFILE_I] <= sp[15:8];
+				regfile[`REGFILE_J] <= sp[7:0];
+			end
+			`REGFILE_IJ:
+			begin
+				regfile[`REGFILE_I] <= regfile[`REGFILE_I];
+				regfile[`REGFILE_J] <= regfile[`REGFILE_J];
+			end
+			`REGFILE_KL:
+			begin
+				regfile[`REGFILE_I] <= regfile[`REGFILE_K];
+				regfile[`REGFILE_J] <= regfile[`REGFILE_L];
+			end
+			endcase
+		`REGFILE_KL:
+			case (reg16_src)
+			`REGFILE_PC:
+			begin
+				regfile[`REGFILE_K] <= pc[15:8];
+				regfile[`REGFILE_L] <= pc[7:0];
+			end
+			`REGFILE_SP:
+			begin
+				regfile[`REGFILE_K] <= sp[15:8];
+				regfile[`REGFILE_L] <= sp[7:0];
+			end
+			`REGFILE_IJ:
+			begin
+				regfile[`REGFILE_K] <= regfile[`REGFILE_I];
+				regfile[`REGFILE_L] <= regfile[`REGFILE_J];
+			end
+			`REGFILE_KL:
+			begin
+				regfile[`REGFILE_K] <= regfile[`REGFILE_K];
+				regfile[`REGFILE_L] <= regfile[`REGFILE_L];
+			end
+			endcase
+		endcase
 	end
 end
 

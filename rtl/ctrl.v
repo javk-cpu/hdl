@@ -29,6 +29,8 @@ module ctrl(
 	output reg  [3:0] alu_shamt,
 	output reg        alu_clk,
 	output wire       fetch,
+	output wire       mva,
+	output wire       mvb,
 	output wire       nibble_hl,
 	output wire [3:0] nibble_out,
 	output wire       nibble_read,
@@ -52,8 +54,8 @@ assign we    = (opcode == `OPCODE_STB);
 
 assign nibble_out = operand;
 assign reg_sel    = operand;
-assign reg16_src  = operand[3:2];
-assign reg16_dst  = operand[1:0];
+assign reg16_dst  = operand[3:2];
+assign reg16_src  = operand[1:0];
 
 
 assign alu_op    = opcode[2:0];
@@ -61,6 +63,10 @@ assign alu_shamt = operand;
 
 always @(negedge clk) alu_clk <= 0;
 always @(posedge clk) if (!opcode[`OPCODE_ARITHMETIC_BIT]) alu_clk <= 1;
+
+
+assign mva = (opcode == `OPCODE_MVA);
+assign mvb = (opcode == `OPCODE_MVB);
 
 
 assign nibble_hl   = (opcode == `OPCODE_LNH);
