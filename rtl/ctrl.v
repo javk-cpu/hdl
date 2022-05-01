@@ -63,4 +63,14 @@ always @(negedge clk) alu_clk <= 0;
 always @(posedge clk) if (!opcode[`OPCODE_ARITHMETIC_BIT]) alu_clk <= 1;
 
 
+always @(posedge clk)
+begin
+	if (opcode == `OPCODE_STB)
+	begin
+		fetch <= !fetch;
+		we    <= !we;
+	end
+end
+
+
 endmodule
