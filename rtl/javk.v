@@ -87,7 +87,6 @@ assign datain  = rw ? 8'bz : databus;
 
 
 assign alu_reg = regfile[reg_sel];
-assign regfile[`REGFILE_Z] = 8'b0;
 
 
 always @(negedge clk)
@@ -99,8 +98,9 @@ begin
 
 		dataout <= 0;
 
-		pc <= 0;
-		sp <= 0;
+		regfile[`REGFILE_Z] <= 0;
+		pc                  <= 0;
+		sp                  <= 0;
 	end
 end
 
