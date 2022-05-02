@@ -17,10 +17,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+`include "alu.vh"
+`include "flag.vh"
 `include "opcode.vh"
 
 
 module ctrl(
+	input wire [3:0] alu_flags,
 	input wire [7:0] instr,
 	input            clk,
 
@@ -28,7 +31,10 @@ module ctrl(
 	output reg  [2:0] alu_op,
 	output reg  [3:0] alu_shamt,
 	output reg        alu_clk,
+	output reg        branch,
 	output wire       fetch,
+	output wire       jmp,
+	output wire       jpl,
 	output wire       mva,
 	output wire       mvb,
 	output wire       nibble_hl,
@@ -63,6 +69,49 @@ assign alu_shamt = operand;
 
 always @(negedge clk) alu_clk <= 0;
 always @(posedge clk) if (!opcode[`OPCODE_ARITHMETIC_BIT]) alu_clk <= 1;
+
+
+always @(operand)
+begin
+	case (operand)
+	`FLAG_EQ:
+		branch <= alu_flags[`ALU_FLAG_Z];
+	`FLAG_NE:
+		branch <= !alu_flags[`ALU_FLAG_Z];
+	`FLAG_HS:
+		branch <= alu_flags[`ALU_FLAG_C];
+	`FLAG_LO:
+		branch <= !alu_flags[`ALU_FLAG_C];
+	`FLAG_MI:
+		branch <= alu_flags[`ALU_FLAG_N];
+	`FLAG_PL:
+		branch <= !alu_flags[`ALU_FLAG_N];
+	`FLAG_VS:
+		branch <= alu_flags[`ALU_FLAG_V];
+	`FLAG_VC:
+		branch <= !alu_flags[`ALU_FLAG_V];
+	`FLAG_HI:
+		branch <= (alu_flags[`ALU_FLAG_C] && !alu_flags[`ALU_FLAG_Z]);
+	`FLAG_LS:
+		branch <= !(alu_flags[`ALU_FLAG_C] && !alu_flags[`ALU_FLAG_Z]);
+	`FLAG_GE:
+		branch <= (alu_flags[`ALU_FLAG_N] == alu_flags[`ALU_FLAG_V]);
+	`FLAG_LT:
+		branch <= (alu_flags[`ALU_FLAG_N] != alu_flags[`ALU_FLAG_V]);
+	`FLAG_GT:
+		branch <= (!alu_flags[`ALU_FLAG_Z] && (alu_flags[`ALU_FLAG_N] == alu_flags[`ALU_FLAG_V]));
+	`FLAG_LE:
+		branch <= !(!alu_flags[`ALU_FLAG_Z] && (alu_flags[`ALU_FLAG_N] == alu_flags[`ALU_FLAG_V]));
+	`FLAG_AL:
+		branch <= 1;
+	`FLAG_NV:
+		branch <= 1;
+	endcase
+end
+
+
+assign jmp = (opcode == `OPCODE_JMP);
+assign jpl = (opcode == `OPCODE_JPL);
 
 
 assign mva = (opcode == `OPCODE_MVA);

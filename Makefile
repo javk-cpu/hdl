@@ -27,11 +27,11 @@ ALU_INC = $(RTL)/alu.vh
 ALU_TB  = $(TESTS)/alu_tb.v
 
 CTRL_SRC = $(RTL)/ctrl.v
-CTRL_INC = $(RTL)/opcode.vh
+CTRL_INC = $(RTL)/alu.vh $(RTL)/flag.vh $(RTL)/opcode.vh
 CTRL_TB  = $(TESTS)/ctrl_tb.v
 
 JAVK_SRC = $(RTL)/javk.v $(ALU_SRC) $(CTRL_SRC)
-JAVK_INC = $(RTL)/regfile.vh
+JAVK_INC = $(RTL)/regfile.vh $(CTRL_INC)
 JAVK_TB  = $(TESTS)/javk_tb.v
 
 

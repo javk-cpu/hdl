@@ -58,7 +58,10 @@ alu alu_javk(
 
 reg  [7:0] instr;
 wire [3:0] addr_offset;
+wire       branch;
 wire       fetch;
+wire       jmp;
+wire       jpl;
 wire       mva;
 wire       mvb;
 wire       nibble_hl;
@@ -70,6 +73,7 @@ wire [1:0] reg16_dst;
 wire       we;
 
 ctrl ctrl_javk(
+	.alu_flags(alu_flags),
 	.instr(instr),
 	.clk(clk),
 
@@ -77,7 +81,10 @@ ctrl ctrl_javk(
 	.alu_op(alu_op),
 	.alu_shamt(alu_shamt),
 	.alu_clk(alu_clk),
+	.branch(branch),
 	.fetch(fetch),
+	.jmp(jmp),
+	.jpl(jpl),
 	.mva(mva),
 	.mvb(mvb),
 	.nibble_hl(nibble_hl),
@@ -136,6 +143,19 @@ begin
 
 		if (rw) dataout <= regfile[`REGFILE_A];
 		else    regfile[`REGFILE_A] <= datain;
+	end
+end
+
+
+always @(posedge clk) if (jmp && branch) pc <= {regfile[`REGFILE_I], regfile[`REGFILE_J]};
+always @(posedge clk)
+begin
+	if (jpl && branch)
+	begin
+		regfile[`REGFILE_K] <= pc[15:8];
+		regfile[`REGFILE_L] <= pc[7:0];
+
+		pc <= {regfile[`REGFILE_I], regfile[`REGFILE_J]};
 	end
 end
 
