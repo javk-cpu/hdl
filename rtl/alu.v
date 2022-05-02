@@ -20,17 +20,11 @@
 `include "alu.vh"
 
 
-`define FLAG_N 3
-`define FLAG_Z 2
-`define FLAG_C 1
-`define FLAG_V 0
-
-
 module alu(
 	input wire [7:0] a,
 	input wire [7:0] b,
 	input wire [2:0] op,
-	input wire [2:0] shamt,
+	input wire [3:0] shamt,
 	input wire       clk,
 
 	output reg [7:0] out,
@@ -70,10 +64,10 @@ always @(posedge clk)
 begin
 	out <= tmp_out;
 
-	flags[`FLAG_N] <= tmp_out[7];
-	flags[`FLAG_Z] <= !tmp_out[7:0];
-	flags[`FLAG_C] <= tmp_out[8];
-	flags[`FLAG_V] <= (tmp_out[15:8]) ? 1 : 0;
+	flags[`ALU_FLAG_N] <= tmp_out[7];
+	flags[`ALU_FLAG_Z] <= !tmp_out[7:0];
+	flags[`ALU_FLAG_C] <= tmp_out[8];
+	flags[`ALU_FLAG_V] <= (tmp_out[15:8]) ? 1 : 0;
 end
 
 
