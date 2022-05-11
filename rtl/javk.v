@@ -259,7 +259,4 @@ begin
 end
 
 
-always @(posedge clk) if (we) dataout <= regfile[`REGFILE_A];
-
-
 endmodule
