@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+`include "flag.vh"
 `include "regfile.vh"
 
 
@@ -43,7 +44,7 @@ wire [2:0] alu_op;
 wire [3:0] alu_shamt;
 wire [3:0] alu_flags;
 wire       alu_clk;
-reg  [7:0] alu_out;
+wire [7:0] alu_out;
 
 alu alu_javk(
 	.a(regfile[`REGFILE_A]),
@@ -104,7 +105,7 @@ assign datain  = rw ? 8'bz : databus;
 
 
 assign alu_reg = regfile[reg_sel];
-always @(alu_out) regfile[`REGFILE_A] <= alu_out;
+always @(alu_clk) #1 regfile[`REGFILE_A] <= alu_out;
 
 
 always @(negedge clk)
@@ -116,6 +117,7 @@ begin
 
 		dataout <= 0;
 
+		regfile[`REGFILE_F] <= 0;
 		regfile[`REGFILE_Z] <= 0;
 		pc                  <= 0;
 		sp                  <= 0;
@@ -152,10 +154,16 @@ always @(posedge clk)
 begin
 	if (jpl && branch)
 	begin
-		regfile[`REGFILE_K] <= pc[15:8];
-		regfile[`REGFILE_L] <= pc[7:0];
+		if (!regfile[`REGFILE_F][`FLAG_RET])
+		begin
+			regfile[`REGFILE_K] <= pc[15:8];
+			regfile[`REGFILE_L] <= pc[7:0];
+		end
 
 		pc <= {regfile[`REGFILE_I], regfile[`REGFILE_J]};
+		sp <= regfile[`REGFILE_F][`FLAG_RET] ? sp + 16 : sp - 16;
+
+		regfile[`REGFILE_F][`FLAG_RET] <= 0;
 	end
 end
 
@@ -257,9 +265,6 @@ begin
 		else           regfile[`REGFILE_A][3:0] <= nibble_out;
 	end
 end
-
-
-always @(posedge clk) if (we) dataout <= regfile[`REGFILE_A];
 
 
 endmodule
