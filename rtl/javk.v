@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+`include "flag.vh"
 `include "regfile.vh"
 
 
@@ -116,6 +117,7 @@ begin
 
 		dataout <= 0;
 
+		regfile[`REGFILE_F] <= 0;
 		regfile[`REGFILE_Z] <= 0;
 		pc                  <= 0;
 		sp                  <= 0;
@@ -152,10 +154,16 @@ always @(posedge clk)
 begin
 	if (jpl && branch)
 	begin
-		regfile[`REGFILE_K] <= pc[15:8];
-		regfile[`REGFILE_L] <= pc[7:0];
+		if (!regfile[`REGFILE_F][`FLAG_RET])
+		begin
+			regfile[`REGFILE_K] <= pc[15:8];
+			regfile[`REGFILE_L] <= pc[7:0];
+		end
 
 		pc <= {regfile[`REGFILE_I], regfile[`REGFILE_J]};
+		sp <= regfile[`REGFILE_F][`FLAG_RET] ? sp + 16 : sp - 16;
+
+		regfile[`REGFILE_F][`FLAG_RET] <= 0;
 	end
 end
 
