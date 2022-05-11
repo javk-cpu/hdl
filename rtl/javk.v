@@ -43,7 +43,7 @@ wire [2:0] alu_op;
 wire [3:0] alu_shamt;
 wire [3:0] alu_flags;
 wire       alu_clk;
-reg  [7:0] alu_out;
+wire [7:0] alu_out;
 
 alu alu_javk(
 	.a(regfile[`REGFILE_A]),
@@ -104,7 +104,7 @@ assign datain  = rw ? 8'bz : databus;
 
 
 assign alu_reg = regfile[reg_sel];
-always @(alu_out) regfile[`REGFILE_A] <= alu_out;
+always @(alu_clk) #1 regfile[`REGFILE_A] <= alu_out;
 
 
 always @(negedge clk)
