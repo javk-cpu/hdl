@@ -38,5 +38,7 @@
 `define FLAG_AL 4'b1110
 `define FLAG_NV 4'b1111
 
+`define FLAG_RET 0
+
 
 `endif /* JAVK_HDL_FLAG */
