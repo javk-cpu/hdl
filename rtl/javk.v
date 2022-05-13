@@ -164,6 +164,10 @@ begin
 		sp <= regfile[`REGFILE_F][`FLAG_RET] ? sp + 16 : sp - 16;
 
 		regfile[`REGFILE_F][`FLAG_RET] <= 0;
+
+		#1;
+		regfile[`REGFILE_I] <= sp[15:8];
+		regfile[`REGFILE_J] <= sp[7:0];
 	end
 end
 
