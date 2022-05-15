@@ -54,7 +54,22 @@ assign dataread = rw ? databus : 8'bz;
 assign datawrite = mem[addrbus];
 
 
-always @(clk) $display("addrbus: 0x%4h rw: %1b databus: 0x%2h clk: %1b", addrbus, rw, databus, clk);
+integer rst_complete = 0;
+initial
+begin
+	rst <= 1;
+	#`CLK_TICKS;
+	#`CLK_TICKS;
+	#`CLK_TICKS;
+	#`CLK_TICKS;
+	rst <= 0;
+
+	$display("RESET COMPLETE");
+	rst_complete = 1;
+end
+
+
+always @(clk) if (rst_complete) $display("addrbus: 0x%4h rw: %1b databus: 0x%2h clk: %1b", addrbus, rw, databus, clk);
 
 
 always
