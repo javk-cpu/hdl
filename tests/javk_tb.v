@@ -48,6 +48,9 @@ assign databus  = rw ? 8'bz : datawrite;
 assign dataread = rw ? databus : 8'bz;
 
 
+always @(clk) $display("addrbus: 0x%4h rw: %1b databus: 0x%2h clk: %1b", addrbus, rw, databus, clk);
+
+
 always
 begin
 	clk <= 0;
