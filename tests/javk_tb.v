@@ -44,8 +44,14 @@ javk uut(
 wire [7:0] dataread;
 reg  [7:0] datawrite;
 
+reg  [7:0] mem [65535:0];
+
+
 assign databus  = rw ? 8'bz : datawrite;
 assign dataread = rw ? databus : 8'bz;
+
+
+assign datawrite = mem[addrbus];
 
 
 always @(clk) $display("addrbus: 0x%4h rw: %1b databus: 0x%2h clk: %1b", addrbus, rw, databus, clk);
