@@ -31,7 +31,7 @@ reg rst;
 wire [15:0] addrbus;
 wire        rw;
 
-javk uut(
+javk javk_cpu(
 	.databus(databus),
 
 	.clk(clk),
