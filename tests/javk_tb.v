@@ -44,7 +44,7 @@ javk uut(
 wire [7:0] dataread;
 reg  [7:0] datawrite;
 
-reg  [7:0] mem [65535:0];
+reg  [7:0] mem [0:65535];
 
 
 assign databus  = rw ? 8'bz : datawrite;
@@ -57,6 +57,9 @@ assign datawrite = mem[addrbus];
 integer rst_complete = 0;
 initial
 begin
+	$display("Loading 'a.hex'");
+	$readmemh("a.hex", mem);
+
 	rst <= 1;
 	#`CLK_TICKS;
 	#`CLK_TICKS;
