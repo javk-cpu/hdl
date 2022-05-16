@@ -52,6 +52,7 @@ assign dataread = rw ? databus : 8'bz;
 
 
 assign datawrite = mem[addrbus];
+always @(posedge clk) #2 if (rw) mem[addrbus] <= dataread;
 
 
 integer rst_complete = 0;
