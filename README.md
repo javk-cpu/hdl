@@ -15,6 +15,15 @@ This should create the `build/` directory and build all available test
 benches.
 
 
+## Running the JAVK Test Bench
+
+The test bench expects a file called `a.hex` in the current working directory.
+This file is loaded starting at address zero and must be a plain text file with
+a hex byte on each new line.  While the test bench is running, it dumps all
+instantiated modules to a file named `a.vcd`.  Terminal output also reflects
+the current state of the CPU.
+
+
 ## Copyright & Licensing
 
 Copyright (C) 2022  Jacob Koziej [`<jacobkoziej@gmail.com>`]

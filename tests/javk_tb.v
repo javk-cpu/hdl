@@ -31,7 +31,7 @@ reg rst;
 wire [15:0] addrbus;
 wire        rw;
 
-javk uut(
+javk javk_cpu(
 	.databus(databus),
 
 	.clk(clk),
@@ -44,8 +44,38 @@ javk uut(
 wire [7:0] dataread;
 reg  [7:0] datawrite;
 
+reg  [7:0] mem [0:65535];
+
+
 assign databus  = rw ? 8'bz : datawrite;
 assign dataread = rw ? databus : 8'bz;
+
+
+assign datawrite = mem[addrbus];
+
+
+integer rst_complete = 0;
+initial
+begin
+	$dumpfile("a.vcd");
+	$dumpvars(0, javk_tb);
+
+	$display("Loading 'a.hex'");
+	$readmemh("a.hex", mem);
+
+	rst <= 1;
+	#`CLK_TICKS;
+	#`CLK_TICKS;
+	#`CLK_TICKS;
+	#`CLK_TICKS;
+	rst <= 0;
+
+	$display("RESET COMPLETE");
+	rst_complete = 1;
+end
+
+
+always @(clk) if (rst_complete) $display("addrbus: 0x%4h rw: %1b databus: 0x%2h clk: %1b", addrbus, rw, databus, clk);
 
 
 always
