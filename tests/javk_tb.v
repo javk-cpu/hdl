@@ -57,6 +57,9 @@ assign datawrite = mem[addrbus];
 integer rst_complete = 0;
 initial
 begin
+	$dumpfile("a.vcd");
+	$dumpvars(0, javk_tb);
+
 	$display("Loading 'a.hex'");
 	$readmemh("a.hex", mem);
 
